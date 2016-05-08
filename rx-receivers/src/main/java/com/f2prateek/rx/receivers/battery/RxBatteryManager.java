@@ -86,4 +86,154 @@ public class RxBatteryManager {
   public static Observable<Integer> voltage(@NonNull final Context context) {
     return changed(context, BatteryManager.EXTRA_VOLTAGE);
   }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> discharging(@NonNull final Context context) {
+    return status(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_STATUS_DISCHARGING;
+      }
+    });
+  }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> unknown(@NonNull final Context context) {
+    return status(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_STATUS_UNKNOWN;
+      }
+    });
+  }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> charging(@NonNull final Context context) {
+    return status(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_STATUS_CHARGING;
+      }
+    });
+  }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> notCharging(@NonNull final Context context) {
+    return status(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_STATUS_NOT_CHARGING;
+      }
+    });
+  }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> full(@NonNull final Context context) {
+    return status(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_STATUS_FULL;
+      }
+    });
+  }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> unknownHealth(@NonNull final Context context) {
+    return health(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_HEALTH_UNKNOWN;
+      }
+    });
+  }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> good(@NonNull final Context context) {
+    return health(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_HEALTH_GOOD;
+      }
+    });
+  }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> overheat(@NonNull final Context context) {
+    return health(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_HEALTH_OVERHEAT;
+      }
+    });
+  }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> dead(@NonNull final Context context) {
+    return health(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_HEALTH_DEAD;
+      }
+    });
+  }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> overVoltage(@NonNull final Context context) {
+    return health(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE;
+      }
+    });
+  }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> unspecifiedFailure(@NonNull final Context context) {
+    return health(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE;
+      }
+    });
+  }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> cold(@NonNull final Context context) {
+    return health(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_HEALTH_COLD;
+      }
+    });
+  }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> wireless(@NonNull final Context context) {
+    return plugged(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_PLUGGED_WIRELESS;
+      }
+    });
+  }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> ac(@NonNull final Context context) {
+    return plugged(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_PLUGGED_WIRELESS;
+      }
+    });
+  }
+
+  /** TODO: docs. */
+  @CheckResult @NonNull //
+  public static Observable<Integer> usb(@NonNull final Context context) {
+    return plugged(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(Integer i) {
+        return i == BatteryManager.BATTERY_PLUGGED_USB;
+      }
+    });
+  }
 }
