@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import rx.observers.TestSubscriber;
+import rx.functions.Func1;
 
 @RunWith(RobolectricTestRunner.class) //
 public class RxBatteryManagerTest {
@@ -27,7 +28,12 @@ public class RxBatteryManagerTest {
     Application application = RuntimeEnvironment.application;
 
     TestSubscriber<Integer> o = new TestSubscriber<>();
-    RxBatteryManager.plugged(application).subscribe(o);
+    //.map(BatteryChangedEvent.toPlugged())
+    RxBatteryManager.changes(application).map(new Func1<BatteryChangedEvent, Integer>() {
+            @Override public Integer call(BatteryChangedEvent changes) {
+                return changes.plugged();
+            }
+        }).subscribe(o);
     o.assertValues();
 
     Intent intent1 = new Intent(Intent.ACTION_BATTERY_CHANGED) //
@@ -51,7 +57,11 @@ public class RxBatteryManagerTest {
     Application application = RuntimeEnvironment.application;
 
     TestSubscriber<Integer> o = new TestSubscriber<>();
-    RxBatteryManager.status(application).subscribe(o);
+    RxBatteryManager.changes(application).map(new Func1<BatteryChangedEvent, Integer>() {
+            @Override public Integer call(BatteryChangedEvent changes) {
+                return changes.status();
+            }
+        }).subscribe(o);
     o.assertValues();
 
     Intent intent1 = new Intent(Intent.ACTION_BATTERY_CHANGED) //
