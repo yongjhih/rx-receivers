@@ -1,4 +1,4 @@
-package com.f2prateek.rx.receivers.battery;
+package rx.android.receivers.battery;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,10 +6,10 @@ import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
-import com.f2prateek.rx.receivers.RxBroadcastReceiver;
+import rx.android.receivers.RxBroadcastReceiver;
 import rx.functions.Func1;
 import rx.Observable;
-import static com.f2prateek.rx.receivers.internal.Preconditions.checkNotNull;
+import static rx.android.receivers.internal.Preconditions.checkNotNull;
 
 public class RxBatteryManager {
   private RxBatteryManager() {

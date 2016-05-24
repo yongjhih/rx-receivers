@@ -1,4 +1,4 @@
-package com.f2prateek.rx.receivers.internal;
+package rx.android.receivers.internal;
 
 public final class Preconditions {
   public static void checkNotNull(Object o, String failureMessage) {

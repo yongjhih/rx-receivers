@@ -1,9 +1,9 @@
-package com.f2prateek.rx.receivers;
+package rx.android.receivers;
 
 import android.app.Application;
 import android.content.Intent;
 import android.content.IntentFilter;
-import com.f2prateek.rx.receivers.RxBroadcastReceiver;
+import rx.android.receivers.RxBroadcastReceiver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;

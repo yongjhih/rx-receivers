@@ -1,4 +1,4 @@
-package com.f2prateek.rx.receivers.wifi;
+package rx.android.receivers.wifi;
 
 import android.app.Application;
 import android.content.Intent;
@@ -7,9 +7,9 @@ import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Parcelable;
-import com.f2prateek.rx.receivers.wifi.NetworkStateChangedEvent;
-import com.f2prateek.rx.receivers.wifi.RxWifiManager;
-import com.f2prateek.rx.receivers.wifi.SupplicantStateChangedEvent;
+import rx.android.receivers.wifi.NetworkStateChangedEvent;
+import rx.android.receivers.wifi.RxWifiManager;
+import rx.android.receivers.wifi.SupplicantStateChangedEvent;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;

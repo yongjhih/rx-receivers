@@ -1,4 +1,4 @@
-package com.f2prateek.rx.receivers.telephony;
+package rx.android.receivers.telephony;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,12 +6,12 @@ import android.content.IntentFilter;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
-import com.f2prateek.rx.receivers.RxBroadcastReceiver;
-import com.f2prateek.rx.receivers.internal.Preconditions;
+import rx.android.receivers.RxBroadcastReceiver;
+import rx.android.receivers.internal.Preconditions;
 import rx.Observable;
 import rx.functions.Func1;
 
-import static com.f2prateek.rx.receivers.internal.Preconditions.checkNotNull;
+import static rx.android.receivers.internal.Preconditions.checkNotNull;
 
 public final class RxTelephonyManager {
   private RxTelephonyManager() {

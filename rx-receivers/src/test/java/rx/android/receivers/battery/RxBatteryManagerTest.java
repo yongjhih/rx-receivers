@@ -1,4 +1,4 @@
-package com.f2prateek.rx.receivers.battery;
+package rx.android.receivers.battery;
 
 import android.app.Application;
 import android.content.Intent;

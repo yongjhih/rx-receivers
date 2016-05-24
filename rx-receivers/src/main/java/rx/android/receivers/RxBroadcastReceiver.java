@@ -1,4 +1,4 @@
-package com.f2prateek.rx.receivers;
+package rx.android.receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,7 +12,7 @@ import rx.functions.Action0;
 import rx.functions.Func1;
 import rx.subscriptions.Subscriptions;
 
-import static com.f2prateek.rx.receivers.internal.Preconditions.checkNotNull;
+import static rx.android.receivers.internal.Preconditions.checkNotNull;
 
 public final class RxBroadcastReceiver {
   private RxBroadcastReceiver() {

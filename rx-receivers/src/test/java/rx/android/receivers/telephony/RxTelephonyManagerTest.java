@@ -1,9 +1,9 @@
-package com.f2prateek.rx.receivers.telephony;
+package rx.android.receivers.telephony;
 
 import android.app.Application;
 import android.content.Intent;
-import com.f2prateek.rx.receivers.telephony.PhoneStateChangedEvent;
-import com.f2prateek.rx.receivers.telephony.RxTelephonyManager;
+import rx.android.receivers.telephony.PhoneStateChangedEvent;
+import rx.android.receivers.telephony.RxTelephonyManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;

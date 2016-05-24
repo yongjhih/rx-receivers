@@ -1,9 +1,9 @@
-package com.f2prateek.rx.receivers.telephony;
+package rx.android.receivers.telephony;
 
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.f2prateek.rx.receivers.internal.Preconditions;
+import rx.android.receivers.internal.Preconditions;
 import com.google.auto.value.AutoValue;
 
 @AutoValue

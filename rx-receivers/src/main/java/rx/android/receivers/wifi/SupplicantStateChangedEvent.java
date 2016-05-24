@@ -1,9 +1,9 @@
-package com.f2prateek.rx.receivers.wifi;
+package rx.android.receivers.wifi;
 
 import android.net.wifi.SupplicantState;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
-import com.f2prateek.rx.receivers.internal.Preconditions;
+import rx.android.receivers.internal.Preconditions;
 import com.google.auto.value.AutoValue;
 
 @AutoValue

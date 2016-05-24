@@ -1,4 +1,4 @@
-package com.f2prateek.rx.receivers.wifi;
+package rx.android.receivers.wifi;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,14 +9,14 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
-import com.f2prateek.rx.receivers.RxBroadcastReceiver;
-import com.f2prateek.rx.receivers.internal.Preconditions;
+import rx.android.receivers.RxBroadcastReceiver;
+import rx.android.receivers.internal.Preconditions;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func1;
 
 import static android.net.wifi.WifiManager.EXTRA_WIFI_STATE;
-import static com.f2prateek.rx.receivers.internal.Preconditions.checkNotNull;
+import static rx.android.receivers.internal.Preconditions.checkNotNull;
 
 public final class RxWifiManager {
   private RxWifiManager() {
