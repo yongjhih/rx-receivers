@@ -31,6 +31,15 @@ dependencies {
   testCompile deps.junit
   testCompile deps.assertj
   testCompile deps.robolectric
+  testCompile deps.rxassertions
+}
+
+tasks.withType(Test) {
+  testLogging {
+    exceptionFormat "full"
+    events "passed", "skipped", "failed", "standardOut", "standardError"
+    showStandardStreams = true
+  }
 }
 
 apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
