@@ -39,5 +39,5 @@ ext.deps = [
     junit: 'junit:junit:4.12',
     assertj: 'org.assertj:assertj-core:1.7.0',
     robolectric: 'org.robolectric:robolectric:3.0',
-    rxassertions: 'com.github.yongjhih:rxassertions:0.2.3',
+    rxassertions: 'com.github.yongjhih:rxassertions:0.2.4',
 ]
