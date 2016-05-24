@@ -38,3 +38,6 @@ apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
 jacocoAndroidUnitTestReport {
   excludes += ['**/AutoValue_*.*']
 }
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply from: rootProject.file('gradle/android-javadoc.gradle')
