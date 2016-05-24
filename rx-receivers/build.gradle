@@ -38,3 +38,5 @@ apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
 jacocoAndroidUnitTestReport {
   excludes += ['**/AutoValue_*.*']
 }
+
+apply from: rootProject.file('gradle/jacoco-android-coveralls.gradle')
