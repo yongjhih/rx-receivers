@@ -1,6 +1,11 @@
 # Rx Receivers
 
-Reactive `BroadcastReceiver` implementations for Android. 
+[![JitPack](https://img.shields.io/github/tag/yongjhih/rx-receivers.svg?label=JitPack)](https://jitpack.io/#yongjhih/rx-receivers)
+[![javadoc](https://img.shields.io/github/tag/yongjhih/rx-receivers.svg?label=javadoc)](https://jitpack.io/com/github/yongjhih/rx-receivers/-SNAPSHOT/javadoc/)
+[![Build Status](https://travis-ci.org/yongjhih/rx-receivers.svg)](https://travis-ci.org/yongjhih/rx-receivers)
+[![Coverage Status](https://coveralls.io/repos/github/yongjhih/rx-receivers/badge.svg)](https://coveralls.io/github/yongjhih/rx-receivers)
+
+Reactive `BroadcastReceiver` implementations for Android.
 
 *Note*: work in progress
 
@@ -37,7 +42,6 @@ repositories {
 compile 'com.f2prateek.rx.receivers:rx-receivers:0.1.0-SNAPSHOT'
 ```
 
-<!-- Uncomment until existing any git tag
 or via jitpack:
 
 ```gradle
@@ -47,10 +51,9 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.f2prateek:rx-receivers:-SNAPSHOT'
+    compile 'com.github.yongjhih:rx-receivers:-SNAPSHOT'
 }
 ```
--->
 
 ### License
 
