@@ -55,6 +55,18 @@ dependencies {
 }
 ```
 
+### Test
+
+```sh
+./gradlew :rx-receivers:test
+```
+
+### Coverage
+
+```sh
+./gradlew :rx-receivers:jacocoTestReport
+```
+
 ### License
 
 ```
