@@ -1,9 +1,11 @@
-# Rx Receivers
+# RxReceivers
 
 [![JitPack](https://img.shields.io/github/tag/yongjhih/rx-receivers.svg?label=JitPack)](https://jitpack.io/#yongjhih/rx-receivers)
 [![javadoc](https://img.shields.io/github/tag/yongjhih/rx-receivers.svg?label=javadoc)](https://jitpack.io/com/github/yongjhih/rx-receivers/-SNAPSHOT/javadoc/)
 [![Build Status](https://travis-ci.org/yongjhih/rx-receivers.svg)](https://travis-ci.org/yongjhih/rx-receivers)
 [![Coverage Status](https://coveralls.io/repos/github/yongjhih/rx-receivers/badge.svg)](https://coveralls.io/github/yongjhih/rx-receivers)
+
+![RxReceivers](https://github.com/yongjhih/rx-receivers/raw/master/art/rx-receivers.png)
 
 Reactive `BroadcastReceiver` implementations for Android.
 
