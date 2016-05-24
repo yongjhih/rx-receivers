@@ -41,3 +41,4 @@ jacocoAndroidUnitTestReport {
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply from: rootProject.file('gradle/android-javadoc.gradle')
+apply from: rootProject.file('gradle/jacoco-android-coveralls.gradle')
