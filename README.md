@@ -52,6 +52,7 @@ repositories {
 
 dependencies {
     compile 'com.github.yongjhih:rx-receivers:-SNAPSHOT'
+    //compile 'com.github.yongjhih:rx-receivers:0.1.0'
 }
 ```
 
