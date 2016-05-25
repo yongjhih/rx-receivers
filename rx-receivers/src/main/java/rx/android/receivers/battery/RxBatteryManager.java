@@ -2,7 +2,6 @@ package rx.android.receivers.battery;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
@@ -11,7 +10,6 @@ import rx.functions.Func1;
 import rx.Observable;
 import static rx.android.receivers.internal.Preconditions.checkNotNull;
 import rx.android.receivers.battery.annotation.BatteryStatus;
-import rx.android.receivers.battery.annotation.BatteryHealth;
 import rx.android.receivers.battery.annotation.BatteryPlugged;
 import rx.android.receivers.battery.annotation.BatteryChangedExtra;
 

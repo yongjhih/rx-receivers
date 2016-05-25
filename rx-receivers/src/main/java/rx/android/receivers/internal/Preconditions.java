@@ -3,7 +3,7 @@ package rx.android.receivers.internal;
 public final class Preconditions {
   public static void checkNotNull(Object o, String failureMessage) {
     if (o == null) {
-      throw new NullPointerException(failureMessage);
+      throw new IllegalArgumentException(failureMessage);
     }
   }
 

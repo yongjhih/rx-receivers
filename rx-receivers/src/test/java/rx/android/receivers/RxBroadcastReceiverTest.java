@@ -18,14 +18,9 @@ import rx.functions.Action0;
 
 @RunWith(RobolectricTestRunner.class) //
 public class RxBroadcastReceiverTest {
-  @Test public void createWithNullThrows() {
-    try {
-      //noinspection ResourceType
+  @Test(expected=IllegalArgumentException.class)
+  public void createWithNullThrows() {
       RxBroadcastReceiver.create(null, (IntentFilter) null);
-      fail();
-    } catch (NullPointerException e) {
-      assertThat(e).hasMessage("context == null");
-    }
   }
 
   @Test public void subscribe() {

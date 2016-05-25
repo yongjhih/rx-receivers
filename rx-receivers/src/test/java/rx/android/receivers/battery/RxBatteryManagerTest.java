@@ -7,11 +7,9 @@ import org.junit.runner.RunWith;
 import org.junit.Test;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import rx.observers.TestSubscriber;
 import rx.functions.Func1;
 import rx.functions.Action0;
 import static rx.assertions.RxAssertions.assertThat;
-import rx.schedulers.Schedulers;
 
 @RunWith(RobolectricTestRunner.class) //
 public class RxBatteryManagerTest {

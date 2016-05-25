@@ -7,7 +7,6 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import rx.android.receivers.RxBroadcastReceiver;
-import rx.android.receivers.internal.Preconditions;
 import rx.Observable;
 import rx.functions.Func1;
 
