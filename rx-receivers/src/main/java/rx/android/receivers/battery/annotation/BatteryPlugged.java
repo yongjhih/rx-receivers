@@ -11,4 +11,4 @@ import android.os.BatteryManager;
   BatteryManager.BATTERY_PLUGGED_WIRELESS
 })
 @Retention(RetentionPolicy.SOURCE)
-public @interface Plugged {}
+public @interface BatteryPlugged {}

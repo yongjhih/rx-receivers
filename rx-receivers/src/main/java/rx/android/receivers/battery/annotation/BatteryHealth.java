@@ -15,4 +15,4 @@ import android.os.BatteryManager;
   BatteryManager.BATTERY_HEALTH_COLD
 })
 @Retention(RetentionPolicy.SOURCE)
-public @interface Health {}
+public @interface BatteryHealth {}

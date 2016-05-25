@@ -10,10 +10,10 @@ import rx.android.receivers.RxBroadcastReceiver;
 import rx.functions.Func1;
 import rx.Observable;
 import static rx.android.receivers.internal.Preconditions.checkNotNull;
-import rx.android.receivers.battery.annotation.Status;
-import rx.android.receivers.battery.annotation.Health;
-import rx.android.receivers.battery.annotation.Plugged;
-import rx.android.receivers.battery.annotation.Changed;
+import rx.android.receivers.battery.annotation.BatteryStatus;
+import rx.android.receivers.battery.annotation.BatteryHealth;
+import rx.android.receivers.battery.annotation.BatteryPlugged;
+import rx.android.receivers.battery.annotation.BatteryChangedExtra;
 
 public class RxBatteryManager {
   private RxBatteryManager() {
@@ -49,7 +49,7 @@ public class RxBatteryManager {
 
   /** TODO: docs. */
   @CheckResult @NonNull //
-  public static Observable<Integer> changed(@NonNull final Context context, @NonNull @Changed final String extra, @NonNull final int defValue) {
+  public static Observable<Integer> changed(@NonNull final Context context, @NonNull @BatteryChangedExtra final String extra, @NonNull final int defValue) {
     checkNotNull(context, "context == null");
     checkNotNull(extra, "extra == null");
     checkNotNull(defValue, "defValue == null");
@@ -58,7 +58,7 @@ public class RxBatteryManager {
 
   /** TODO: docs. */
   @CheckResult @NonNull //
-  public static Observable<Boolean> changed(@NonNull final Context context, @NonNull @Changed final String extra, @NonNull final boolean defValue) {
+  public static Observable<Boolean> changed(@NonNull final Context context, @NonNull @BatteryChangedExtra final String extra, @NonNull final boolean defValue) {
     checkNotNull(context, "context == null");
     checkNotNull(extra, "extra == null");
     checkNotNull(defValue, "defValue == null");
@@ -67,7 +67,7 @@ public class RxBatteryManager {
 
   /** TODO: docs. */
   @CheckResult @NonNull //
-  public static Observable<String> changedString(@NonNull final Context context, @NonNull @Changed final String extra) {
+  public static Observable<String> changedString(@NonNull final Context context, @NonNull @BatteryChangedExtra final String extra) {
     checkNotNull(context, "context == null");
     checkNotNull(extra, "extra == null");
     return RxBroadcastReceiver.createString(context, Intent.ACTION_BATTERY_CHANGED, extra);
@@ -132,7 +132,7 @@ public class RxBatteryManager {
   @CheckResult @NonNull
   public static Observable<Integer> ac(@NonNull final Context context) {
     return plugged(context).filter(new Func1<Integer, Boolean>() {
-      @Override public Boolean call(@Plugged Integer i) {
+      @Override public Boolean call(@BatteryPlugged Integer i) {
           return BatteryManager.BATTERY_PLUGGED_AC == i;
       }
     });
@@ -148,7 +148,7 @@ public class RxBatteryManager {
   @CheckResult @NonNull
   public static Observable<Integer> usb(@NonNull final Context context) {
     return plugged(context).filter(new Func1<Integer, Boolean>() {
-      @Override public Boolean call(@Plugged Integer i) {
+      @Override public Boolean call(@BatteryPlugged Integer i) {
           return BatteryManager.BATTERY_PLUGGED_USB == i;
       }
     });
@@ -164,7 +164,7 @@ public class RxBatteryManager {
   @CheckResult @NonNull
   public static Observable<Boolean> charging(@NonNull final Context context) {
     return status(context).exists(new Func1<Integer, Boolean>() {
-      @Override public Boolean call(@Status Integer i) {
+      @Override public Boolean call(@BatteryStatus Integer i) {
           return BatteryManager.BATTERY_STATUS_CHARGING == i || BatteryManager.BATTERY_STATUS_FULL == i;
       }
     });
@@ -180,7 +180,7 @@ public class RxBatteryManager {
   @CheckResult @NonNull
   public static Observable<Integer> wireless(@NonNull final Context context) {
     return changed(context, BatteryManager.EXTRA_PLUGGED, -1).filter(new Func1<Integer, Boolean>() {
-      @Override public Boolean call(@Plugged Integer i) {
+      @Override public Boolean call(@BatteryPlugged Integer i) {
           return BatteryManager.BATTERY_PLUGGED_WIRELESS == i;
       }
     });

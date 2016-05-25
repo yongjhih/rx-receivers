@@ -10,9 +10,9 @@ import com.google.auto.value.AutoValue;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import rx.functions.Func1;
-import rx.android.receivers.battery.annotation.Status;
-import rx.android.receivers.battery.annotation.Health;
-import rx.android.receivers.battery.annotation.Plugged;
+import rx.android.receivers.battery.annotation.BatteryStatus;
+import rx.android.receivers.battery.annotation.BatteryHealth;
+import rx.android.receivers.battery.annotation.BatteryPlugged;
 
 @AutoValue
 public abstract class BatteryChangedEvent {
@@ -24,13 +24,13 @@ public abstract class BatteryChangedEvent {
 
     @AutoValue.Builder
     abstract static class Builder {
-        abstract Builder health(@NonNull @Health int health);
+        abstract Builder health(@NonNull @BatteryHealth int health);
         abstract Builder smallIcon(@NonNull @DrawableRes int smallIcon);
         abstract Builder level(@NonNull int level);
-        abstract Builder plugged(@NonNull @Plugged int plugged);
+        abstract Builder plugged(@NonNull @BatteryPlugged int plugged);
         abstract Builder present(@NonNull boolean present);
         abstract Builder scale(@NonNull int scale);
-        abstract Builder status(@NonNull @Status int status);
+        abstract Builder status(@NonNull @BatteryStatus int status);
         abstract Builder technology(@Nullable String technology);
         abstract Builder temperature(@NonNull int temperature);
         abstract Builder voltage(@NonNull int voltage);
@@ -38,13 +38,13 @@ public abstract class BatteryChangedEvent {
         abstract BatteryChangedEvent build();
     }
 
-    public abstract @NonNull @Health int health();
+    public abstract @NonNull @BatteryHealth int health();
     public abstract @NonNull @DrawableRes int smallIcon();
     public abstract @NonNull int level();
-    public abstract @NonNull @Plugged int plugged();
+    public abstract @NonNull @BatteryPlugged int plugged();
     public abstract @NonNull boolean present();
     public abstract @NonNull int scale();
-    public abstract @NonNull @Status int status();
+    public abstract @NonNull @BatteryStatus int status();
     public abstract @Nullable String technology();
     public abstract @NonNull int temperature();
     public abstract @NonNull int voltage();
