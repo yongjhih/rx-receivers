@@ -10,6 +10,10 @@ import rx.android.receivers.RxBroadcastReceiver;
 import rx.functions.Func1;
 import rx.Observable;
 import static rx.android.receivers.internal.Preconditions.checkNotNull;
+import rx.android.receivers.battery.annotation.Status;
+import rx.android.receivers.battery.annotation.Health;
+import rx.android.receivers.battery.annotation.Plugged;
+import rx.android.receivers.battery.annotation.Changed;
 
 public class RxBatteryManager {
   private RxBatteryManager() {
@@ -45,7 +49,7 @@ public class RxBatteryManager {
 
   /** TODO: docs. */
   @CheckResult @NonNull //
-  public static Observable<Integer> changed(@NonNull final Context context, @NonNull final String extra, @NonNull final int defValue) {
+  public static Observable<Integer> changed(@NonNull final Context context, @NonNull @Changed final String extra, @NonNull final int defValue) {
     checkNotNull(context, "context == null");
     checkNotNull(extra, "extra == null");
     checkNotNull(defValue, "defValue == null");
@@ -54,7 +58,7 @@ public class RxBatteryManager {
 
   /** TODO: docs. */
   @CheckResult @NonNull //
-  public static Observable<Boolean> changed(@NonNull final Context context, @NonNull final String extra, @NonNull final boolean defValue) {
+  public static Observable<Boolean> changed(@NonNull final Context context, @NonNull @Changed final String extra, @NonNull final boolean defValue) {
     checkNotNull(context, "context == null");
     checkNotNull(extra, "extra == null");
     checkNotNull(defValue, "defValue == null");
@@ -63,7 +67,7 @@ public class RxBatteryManager {
 
   /** TODO: docs. */
   @CheckResult @NonNull //
-  public static Observable<String> changedString(@NonNull final Context context, @NonNull final String extra) {
+  public static Observable<String> changedString(@NonNull final Context context, @NonNull @Changed final String extra) {
     checkNotNull(context, "context == null");
     checkNotNull(extra, "extra == null");
     return RxBroadcastReceiver.createString(context, Intent.ACTION_BATTERY_CHANGED, extra);
@@ -81,16 +85,105 @@ public class RxBatteryManager {
     return changed(context, BatteryManager.EXTRA_ICON_SMALL, -1);
   }
 
-  /** TODO: docs. */
-  @CheckResult @NonNull //
+  /**
+   * Determine the Current Battery Level.
+   *
+   * You can't easily continually monitor the battery state, but you don't need to.
+   * Generally speaking, the impact of constantly monitoring the battery level has a greater impact on the battery
+   * than your app's normal behavior, so it's good practice to only monitor significant changes
+   * in battery level—specifically when the device enters or exits a low battery state.
+   *
+   * The manifest snippet below is extracted from the intent filter element within a broadcast receiver.
+   * The receiver is triggered whenever the device battery becomes low or
+   * exits the low condition by listening for
+   *
+   *     &lt;action android:name="android.intent.action.ACTION_BATTERY_LOW" /&gt;
+   *     &lt;action android:name="android.intent.action.ACTION_BATTERY_OKAY" /&gt;
+   *
+   * It is generally good practice to disable all your background updates when the battery is critically low.
+   * It doesn't matter how fresh your data is if the phone turns itself off before you can make use of it.
+   * In many cases, the act of charging a device is coincident with putting it into a dock.
+   * The next lesson shows you how to determine the current dock state and monitor for changes in device docking.
+   */
+  @CheckResult @NonNull
   public static Observable<Integer> level(@NonNull final Context context) {
     return changed(context, BatteryManager.EXTRA_LEVEL, -1);
   }
 
-  /** TODO: docs. */
-  @CheckResult @NonNull //
+  /**
+   * TODO: docs.
+   *
+   *     &lt;action android:name="android.intent.action.ACTION_POWER_CONNECTED" /&gt;
+   *     &lt;action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" /&gt;
+   *
+   */
+  @CheckResult @NonNull
   public static Observable<Integer> plugged(@NonNull final Context context) {
     return changed(context, BatteryManager.EXTRA_PLUGGED, -1);
+  }
+
+  /**
+   * TODO: docs.
+   *
+   *     &lt;action android:name="android.intent.action.ACTION_POWER_CONNECTED" /&gt;
+   *     &lt;action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" /&gt;
+   *
+   */
+  @CheckResult @NonNull
+  public static Observable<Integer> ac(@NonNull final Context context) {
+    return plugged(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(@Plugged Integer i) {
+          return BatteryManager.BATTERY_PLUGGED_AC == i;
+      }
+    });
+  }
+
+  /**
+   * TODO: docs.
+   *
+   *     &lt;action android:name="android.intent.action.ACTION_POWER_CONNECTED" /&gt;
+   *     &lt;action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" /&gt;
+   *
+   */
+  @CheckResult @NonNull
+  public static Observable<Integer> usb(@NonNull final Context context) {
+    return plugged(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(@Plugged Integer i) {
+          return BatteryManager.BATTERY_PLUGGED_USB == i;
+      }
+    });
+  }
+
+  /**
+   * TODO: docs.
+   *
+   *     &lt;action android:name="android.intent.action.ACTION_POWER_CONNECTED" /&gt;
+   *     &lt;action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" /&gt;
+   *
+   */
+  @CheckResult @NonNull
+  public static Observable<Boolean> charging(@NonNull final Context context) {
+    return status(context).exists(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(@Status Integer i) {
+          return BatteryManager.BATTERY_STATUS_CHARGING == i || BatteryManager.BATTERY_STATUS_FULL == i;
+      }
+    });
+  }
+
+  /**
+   * TODO: docs.
+   *
+   *     &lt;action android:name="android.intent.action.ACTION_POWER_CONNECTED" /&gt;
+   *     &lt;action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" /&gt;
+   *
+   */
+  @CheckResult @NonNull
+  public static Observable<Integer> wireless(@NonNull final Context context) {
+    return changed(context, BatteryManager.EXTRA_PLUGGED, -1).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(@Plugged Integer i) {
+          return BatteryManager.BATTERY_PLUGGED_WIRELESS == i;
+      }
+    });
   }
 
   /** TODO: docs. */
@@ -105,8 +198,14 @@ public class RxBatteryManager {
     return changed(context, BatteryManager.EXTRA_SCALE, -1);
   }
 
-  /** TODO: docs. */
-  @CheckResult @NonNull //
+  /**
+   * TODO: docs.
+   *
+   *     &lt;action android:name="android.intent.action.ACTION_POWER_CONNECTED" /&gt;
+   *     &lt;action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" /&gt;
+   *
+   */
+  @CheckResult @NonNull
   public static Observable<Integer> status(@NonNull final Context context) {
     return changed(context, BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN);
   }
