@@ -111,14 +111,14 @@ public class RxBatteryManagerTest {
     assertThat(RxBatteryManager.level(application)).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_LEVEL, 1));
-      }
-    }).expectedValues(1).then(new Action0() {
-      @Override public void call() {
-        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_LEVEL, 0));
       }
-    }).expectedValues(1, 0);
+    }).expectedValues(0).then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_LEVEL, 1));
+      }
+    }).expectedValues(0, 1);
   }
 
   @Test public void plugged() {
