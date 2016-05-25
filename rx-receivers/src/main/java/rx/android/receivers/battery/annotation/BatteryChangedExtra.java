@@ -18,4 +18,5 @@ import android.os.BatteryManager;
   BatteryManager.EXTRA_STATUS
 })
 @Retention(RetentionPolicy.SOURCE)
-public @interface BatteryChangedExtra {}
+public @interface BatteryChangedExtra {
+}

@@ -30,13 +30,15 @@ public class RxBatteryManager {
     return changed(context).map(new Func1<Intent, BatteryChangedEvent>() {
       @Override public BatteryChangedEvent call(Intent intent) {
           return BatteryChangedEvent.builder()
-              .health(intent.getIntExtra(BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN))
+              .health(intent.getIntExtra(BatteryManager.EXTRA_HEALTH,
+                    BatteryManager.BATTERY_HEALTH_UNKNOWN))
               .smallIcon(intent.getIntExtra(BatteryManager.EXTRA_ICON_SMALL, -1))
               .level(intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1))
               .plugged(intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1))
               .present(intent.getBooleanExtra(BatteryManager.EXTRA_PRESENT, false))
               .scale(intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1))
-              .status(intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN))
+              .status(intent.getIntExtra(BatteryManager.EXTRA_STATUS,
+                    BatteryManager.BATTERY_STATUS_UNKNOWN))
               .technology(intent.getStringExtra(BatteryManager.EXTRA_TECHNOLOGY))
               .temperature(intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1))
               .voltage(intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1))
@@ -92,21 +94,27 @@ public class RxBatteryManager {
    * Determine the Current Battery Level.
    *
    * You can't easily continually monitor the battery state, but you don't need to.
-   * Generally speaking, the impact of constantly monitoring the battery level has a greater impact on the battery
+   * Generally speaking, the impact of constantly monitoring the battery level has a
+   * greater impact on the battery
    * than your app's normal behavior, so it's good practice to only monitor significant changes
    * in battery level—specifically when the device enters or exits a low battery state.
    *
-   * The manifest snippet below is extracted from the intent filter element within a broadcast receiver.
+   * The manifest snippet below is extracted from the intent filter element within a
+   * broadcast receiver.
    * The receiver is triggered whenever the device battery becomes low or
    * exits the low condition by listening for
    *
    *     &lt;action android:name="android.intent.action.ACTION_BATTERY_LOW" /&gt;
    *     &lt;action android:name="android.intent.action.ACTION_BATTERY_OKAY" /&gt;
    *
-   * It is generally good practice to disable all your background updates when the battery is critically low.
-   * It doesn't matter how fresh your data is if the phone turns itself off before you can make use of it.
-   * In many cases, the act of charging a device is coincident with putting it into a dock.
-   * The next lesson shows you how to determine the current dock state and monitor for changes in device docking.
+   * It is generally good practice to disable all your background updates
+   * when the battery is critically low.
+   * It doesn't matter how fresh your data is if the phone turns itself off
+   * before you can make use of it.
+   * In many cases, the act of charging a device is coincident with putting it
+   * into a dock.
+   * The next lesson shows you how to determine the current dock state and monitor
+   * for changes in device docking.
    */
   @CheckResult @NonNull
   public static Observable<Integer> level(@NonNull final Context context) {
@@ -184,7 +192,8 @@ public class RxBatteryManager {
   public static Observable<Boolean> charging(@NonNull final Context context) {
     return status(context).exists(new Func1<Integer, Boolean>() {
       @Override public Boolean call(@BatteryStatus Integer i) {
-          return BatteryManager.BATTERY_STATUS_CHARGING == i || BatteryManager.BATTERY_STATUS_FULL == i;
+          return BatteryManager.BATTERY_STATUS_CHARGING == i ||
+            BatteryManager.BATTERY_STATUS_FULL == i;
       }
     });
   }

@@ -13,4 +13,5 @@ import android.os.BatteryManager;
   BatteryManager.BATTERY_STATUS_FULL
 })
 @Retention(RetentionPolicy.SOURCE)
-public @interface BatteryStatus {}
+public @interface BatteryStatus {
+}
