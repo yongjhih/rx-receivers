@@ -162,10 +162,10 @@ public class RxBatteryManager {
    *
    */
   @CheckResult @NonNull
-  public static Observable<Boolean> charging(@NonNull final Context context) {
-    return status(context).exists(new Func1<Integer, Boolean>() {
-      @Override public Boolean call(@BatteryStatus Integer i) {
-          return BatteryManager.BATTERY_STATUS_CHARGING == i || BatteryManager.BATTERY_STATUS_FULL == i;
+  public static Observable<Integer> wireless(@NonNull final Context context) {
+    return plugged(context).filter(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(@BatteryPlugged Integer i) {
+          return BatteryManager.BATTERY_PLUGGED_WIRELESS == i;
       }
     });
   }
@@ -178,10 +178,10 @@ public class RxBatteryManager {
    *
    */
   @CheckResult @NonNull
-  public static Observable<Integer> wireless(@NonNull final Context context) {
-    return changed(context, BatteryManager.EXTRA_PLUGGED, -1).filter(new Func1<Integer, Boolean>() {
-      @Override public Boolean call(@BatteryPlugged Integer i) {
-          return BatteryManager.BATTERY_PLUGGED_WIRELESS == i;
+  public static Observable<Boolean> charging(@NonNull final Context context) {
+    return status(context).exists(new Func1<Integer, Boolean>() {
+      @Override public Boolean call(@BatteryStatus Integer i) {
+          return BatteryManager.BATTERY_STATUS_CHARGING == i || BatteryManager.BATTERY_STATUS_FULL == i;
       }
     });
   }

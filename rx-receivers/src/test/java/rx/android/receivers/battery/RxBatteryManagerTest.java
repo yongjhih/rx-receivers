@@ -179,6 +179,54 @@ public class RxBatteryManagerTest {
     }).expectedValues(BatteryManager.BATTERY_PLUGGED_AC, BatteryManager.BATTERY_PLUGGED_USB);
   }
 
+  @Test public void ac() {
+    final Application application = RuntimeEnvironment.application;
+
+    assertThat(RxBatteryManager.ac(application)).emitsNothing().then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_AC));
+      }
+    }).expectedValues(BatteryManager.BATTERY_PLUGGED_AC).then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_USB));
+      }
+    }).expectedValues(BatteryManager.BATTERY_PLUGGED_AC);
+  }
+
+  @Test public void usb() {
+    final Application application = RuntimeEnvironment.application;
+
+    assertThat(RxBatteryManager.usb(application)).emitsNothing().then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_AC));
+      }
+    }).expectedValues().then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_USB));
+      }
+    }).expectedValues(BatteryManager.BATTERY_PLUGGED_USB);
+  }
+
+  @Test public void wireless() {
+    final Application application = RuntimeEnvironment.application;
+
+    assertThat(RxBatteryManager.wireless(application)).emitsNothing().then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_AC));
+      }
+    }).emitsNothing().then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_WIRELESS));
+      }
+    }).expectedValues(BatteryManager.BATTERY_PLUGGED_WIRELESS);
+  }
+
   @Test public void present() {
     final Application application = RuntimeEnvironment.application;
 
@@ -285,6 +333,22 @@ public class RxBatteryManagerTest {
             .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_CHARGING));
       }
     }).expectedValues(BatteryManager.BATTERY_STATUS_UNKNOWN, BatteryManager.BATTERY_STATUS_CHARGING);
+  }
+
+  @Test public void charging() {
+    final Application application = RuntimeEnvironment.application;
+
+    assertThat(RxBatteryManager.charging(application)).emitsNothing().then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN));
+      }
+    }).emitsNothing().then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_CHARGING));
+      }
+    }).expectedValues(true);
   }
 
   @Test public void technology() {
