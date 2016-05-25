@@ -4,6 +4,7 @@
 [![javadoc](https://img.shields.io/github/tag/yongjhih/rx-receivers.svg?label=javadoc)](https://jitpack.io/com/github/yongjhih/rx-receivers/-SNAPSHOT/javadoc/)
 [![Build Status](https://travis-ci.org/yongjhih/rx-receivers.svg)](https://travis-ci.org/yongjhih/rx-receivers)
 [![Coverage Status](https://coveralls.io/repos/github/yongjhih/rx-receivers/badge.svg)](https://coveralls.io/github/yongjhih/rx-receivers)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/57f063d80b1f4bf8830a84e187a75b00)](https://codacy.com/app/yongjhih/rx-receivers)
 
 ![RxReceivers](https://github.com/yongjhih/rx-receivers/raw/master/art/rx-receivers.png)
 
