@@ -3,7 +3,6 @@ package rx.android.receivers;
 import android.app.Application;
 import android.content.Intent;
 import android.content.IntentFilter;
-import rx.android.receivers.RxBroadcastReceiver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -11,8 +10,6 @@ import org.robolectric.RuntimeEnvironment;
 import rx.Subscription;
 import rx.observers.TestSubscriber;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
 import rx.assertions.RxAssertions;
 import rx.functions.Action0;
 

@@ -46,7 +46,8 @@ public final class RxBroadcastReceiver {
 
   /** TODO: docs. */
   @CheckResult @NonNull //
-  public static Observable<Intent> create(@NonNull final Context context, @NonNull final String action) {
+  public static Observable<Intent> create(@NonNull final Context context,
+      @NonNull final String action) {
     checkNotNull(context, "context == null");
     checkNotNull(action, "action == null");
     return create(context, new IntentFilter(action));
@@ -54,7 +55,10 @@ public final class RxBroadcastReceiver {
 
   /** TODO: docs. */
   @CheckResult @NonNull //
-  public static Observable<Integer> create(@NonNull final Context context, @NonNull final String action, @NonNull final String extra, @NonNull final int defValue) {
+  public static Observable<Integer> create(@NonNull final Context context,
+      @NonNull final String action,
+      @NonNull final String extra,
+      @NonNull final int defValue) {
     checkNotNull(context, "context == null");
     checkNotNull(action, "action == null");
     checkNotNull(extra, "extra == null");
@@ -68,7 +72,10 @@ public final class RxBroadcastReceiver {
 
   /** TODO: docs. */
   @CheckResult @NonNull //
-  public static Observable<Boolean> create(@NonNull final Context context, @NonNull final String action, @NonNull final String extra, @NonNull final boolean defValue) {
+  public static Observable<Boolean> create(@NonNull final Context context,
+      @NonNull final String action,
+      @NonNull final String extra,
+      @NonNull final boolean defValue) {
     checkNotNull(context, "context == null");
     checkNotNull(action, "action == null");
     checkNotNull(extra, "extra == null");
@@ -82,7 +89,9 @@ public final class RxBroadcastReceiver {
 
   /** TODO: docs. */
   @CheckResult @NonNull //
-  public static Observable<String> createString(@NonNull final Context context, @NonNull final String action, @NonNull final String extra) {
+  public static Observable<String> createString(@NonNull final Context context,
+      @NonNull final String action,
+      @NonNull final String extra) {
     checkNotNull(context, "context == null");
     checkNotNull(action, "action == null");
     checkNotNull(extra, "extra == null");

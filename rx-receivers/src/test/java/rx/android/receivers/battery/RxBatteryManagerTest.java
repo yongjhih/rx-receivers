@@ -314,7 +314,8 @@ public class RxBatteryManagerTest {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_CHARGING));
       }
-    }).expectedValues(BatteryManager.BATTERY_STATUS_UNKNOWN, BatteryManager.BATTERY_STATUS_CHARGING);
+    }).expectedValues(BatteryManager.BATTERY_STATUS_UNKNOWN,
+        BatteryManager.BATTERY_STATUS_CHARGING);
   }
 
   @Test public void statusSimple() {
@@ -330,7 +331,8 @@ public class RxBatteryManagerTest {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_CHARGING));
       }
-    }).expectedValues(BatteryManager.BATTERY_STATUS_UNKNOWN, BatteryManager.BATTERY_STATUS_CHARGING);
+    }).expectedValues(BatteryManager.BATTERY_STATUS_UNKNOWN,
+        BatteryManager.BATTERY_STATUS_CHARGING);
   }
 
   @Test public void charging() {

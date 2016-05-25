@@ -47,7 +47,9 @@ public class RxBatteryManager {
 
   /** TODO: docs. */
   @CheckResult @NonNull //
-  public static Observable<Integer> changed(@NonNull final Context context, @NonNull @BatteryChangedExtra final String extra, @NonNull final int defValue) {
+  public static Observable<Integer> changed(@NonNull final Context context,
+      @NonNull @BatteryChangedExtra final String extra,
+      @NonNull final int defValue) {
     checkNotNull(context, "context == null");
     checkNotNull(extra, "extra == null");
     checkNotNull(defValue, "defValue == null");
@@ -56,7 +58,9 @@ public class RxBatteryManager {
 
   /** TODO: docs. */
   @CheckResult @NonNull //
-  public static Observable<Boolean> changed(@NonNull final Context context, @NonNull @BatteryChangedExtra final String extra, @NonNull final boolean defValue) {
+  public static Observable<Boolean> changed(@NonNull final Context context,
+      @NonNull @BatteryChangedExtra final String extra,
+      @NonNull final boolean defValue) {
     checkNotNull(context, "context == null");
     checkNotNull(extra, "extra == null");
     checkNotNull(defValue, "defValue == null");
@@ -65,7 +69,8 @@ public class RxBatteryManager {
 
   /** TODO: docs. */
   @CheckResult @NonNull //
-  public static Observable<String> changedString(@NonNull final Context context, @NonNull @BatteryChangedExtra final String extra) {
+  public static Observable<String> changedString(@NonNull final Context context,
+      @NonNull @BatteryChangedExtra final String extra) {
     checkNotNull(context, "context == null");
     checkNotNull(extra, "extra == null");
     return RxBroadcastReceiver.createString(context, Intent.ACTION_BATTERY_CHANGED, extra);
