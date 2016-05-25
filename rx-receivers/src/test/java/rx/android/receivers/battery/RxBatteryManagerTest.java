@@ -13,26 +13,6 @@ import static rx.assertions.RxAssertions.assertThat;
 
 @RunWith(RobolectricTestRunner.class) //
 public class RxBatteryManagerTest {
-  @Test public void changed() {
-    final Application application = RuntimeEnvironment.application;
-
-    assertThat(RxBatteryManager.changed(application).map(new Func1<Intent, Integer>() {
-      @Override public Integer call(Intent intent) {
-        return intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
-      }
-    })).emitsNothing().then(new Action0() {
-      @Override public void call() {
-        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_AC));
-      }
-    }).expectedValues(BatteryManager.BATTERY_PLUGGED_AC).then(new Action0() {
-      @Override public void call() {
-        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_USB));
-      }
-    }).expectedValues(BatteryManager.BATTERY_PLUGGED_AC, BatteryManager.BATTERY_PLUGGED_USB);
-  }
-
   @Test public void health() {
     final Application application = RuntimeEnvironment.application;
 
@@ -43,14 +23,14 @@ public class RxBatteryManagerTest {
     })).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN));
-      }
-    }).expectedValues(BatteryManager.BATTERY_HEALTH_UNKNOWN).then(new Action0() {
-      @Override public void call() {
-        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_COLD));
       }
-    }).expectedValues(BatteryManager.BATTERY_HEALTH_UNKNOWN, BatteryManager.BATTERY_HEALTH_COLD);
+    }).expectedValues(BatteryManager.BATTERY_HEALTH_COLD).then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN));
+      }
+    }).expectedValues(BatteryManager.BATTERY_HEALTH_COLD, BatteryManager.BATTERY_HEALTH_UNKNOWN);
   }
 
   @Test public void healthSimple() {
@@ -95,14 +75,14 @@ public class RxBatteryManagerTest {
     assertThat(RxBatteryManager.smallIcon(application)).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_ICON_SMALL, 0));
-      }
-    }).expectedValues(0).then(new Action0() {
-      @Override public void call() {
-        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_ICON_SMALL, 1));
       }
-    }).expectedValues(0, 1);
+    }).expectedValues(1).then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_ICON_SMALL, 0));
+      }
+    }).expectedValues(1, 0);
   }
 
   @Test public void level() {
@@ -115,14 +95,14 @@ public class RxBatteryManagerTest {
     })).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_LEVEL, 0));
-      }
-    }).expectedValues(0).then(new Action0() {
-      @Override public void call() {
-        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_LEVEL, 1));
       }
-    }).expectedValues(0, 1);
+    }).expectedValues(1).then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_LEVEL, 0));
+      }
+    }).expectedValues(1, 0);
   }
 
   @Test public void levelSimple() {
@@ -131,14 +111,14 @@ public class RxBatteryManagerTest {
     assertThat(RxBatteryManager.level(application)).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_LEVEL, 0));
-      }
-    }).expectedValues(0).then(new Action0() {
-      @Override public void call() {
-        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_LEVEL, 1));
       }
-    }).expectedValues(0, 1);
+    }).expectedValues(1).then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_LEVEL, 0));
+      }
+    }).expectedValues(1, 0);
   }
 
   @Test public void plugged() {
@@ -151,14 +131,14 @@ public class RxBatteryManagerTest {
     })).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_AC));
-      }
-    }).expectedValues(BatteryManager.BATTERY_PLUGGED_AC).then(new Action0() {
-      @Override public void call() {
-        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_USB));
       }
-    }).expectedValues(BatteryManager.BATTERY_PLUGGED_AC, BatteryManager.BATTERY_PLUGGED_USB);
+    }).expectedValues(BatteryManager.BATTERY_PLUGGED_USB).then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_AC));
+      }
+    }).expectedValues(BatteryManager.BATTERY_PLUGGED_USB, BatteryManager.BATTERY_PLUGGED_AC);
   }
 
   @Test public void pluggedSimple() {
@@ -183,12 +163,12 @@ public class RxBatteryManagerTest {
     assertThat(RxBatteryManager.ac(application)).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_AC));
+            .putExtra(BatteryManager.EXTRA_PLUGGED, -1));
       }
-    }).expectedValues(BatteryManager.BATTERY_PLUGGED_AC).then(new Action0() {
+    }).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_USB));
+            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_AC));
       }
     }).expectedValues(BatteryManager.BATTERY_PLUGGED_AC);
   }
@@ -199,9 +179,9 @@ public class RxBatteryManagerTest {
     assertThat(RxBatteryManager.usb(application)).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_AC));
+            .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_WIRELESS));
       }
-    }).expectedValues().then(new Action0() {
+    }).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_PLUGGED, BatteryManager.BATTERY_PLUGGED_USB));
@@ -251,14 +231,14 @@ public class RxBatteryManagerTest {
     assertThat(RxBatteryManager.present(application)).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_PRESENT, false));
-      }
-    }).expectedValues(false).then(new Action0() {
-      @Override public void call() {
-        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_PRESENT, true));
       }
-    }).expectedValues(false, true);
+    }).expectedValues(true).then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_PRESENT, false));
+      }
+    }).expectedValues(true, false);
   }
 
   @Test public void scale() {
@@ -287,14 +267,14 @@ public class RxBatteryManagerTest {
     assertThat(RxBatteryManager.scale(application)).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_SCALE, 0));
-      }
-    }).expectedValues(0).then(new Action0() {
-      @Override public void call() {
-        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_SCALE, 1));
       }
-    }).expectedValues(0, 1);
+    }).expectedValues(1).then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_SCALE, 0));
+      }
+    }).expectedValues(1, 0);
   }
 
   @Test public void status() {
@@ -324,15 +304,15 @@ public class RxBatteryManagerTest {
     assertThat(RxBatteryManager.status(application)).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN));
-      }
-    }).expectedValues(BatteryManager.BATTERY_STATUS_UNKNOWN).then(new Action0() {
-      @Override public void call() {
-        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_CHARGING));
       }
-    }).expectedValues(BatteryManager.BATTERY_STATUS_UNKNOWN,
-        BatteryManager.BATTERY_STATUS_CHARGING);
+    }).expectedValues(BatteryManager.BATTERY_STATUS_CHARGING).then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN));
+      }
+    }).expectedValues(BatteryManager.BATTERY_STATUS_CHARGING,
+        BatteryManager.BATTERY_STATUS_UNKNOWN);
   }
 
   @Test public void charging() {
@@ -343,12 +323,33 @@ public class RxBatteryManagerTest {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN));
       }
-    }).emitsNothing().then(new Action0() {
+    }).expectedValues(false).then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_CHARGING));
       }
-    }).expectedValues(true);
+    }).expectedValues(false, true).then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN));
+      }
+    }).expectedValues(false, true, false);
+  }
+
+  @Test public void chargingFull() {
+    final Application application = RuntimeEnvironment.application;
+
+    assertThat(RxBatteryManager.charging(application)).emitsNothing().then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_FULL));
+      }
+    }).expectedValues(true).then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN));
+      }
+    }).expectedValues(true, false);
   }
 
   @Test public void technology() {
@@ -377,14 +378,14 @@ public class RxBatteryManagerTest {
     assertThat(RxBatteryManager.technology(application)).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_TECHNOLOGY, ""));
-      }
-    }).expectedValues("").then(new Action0() {
-      @Override public void call() {
-        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_TECHNOLOGY, "Li-ion"));
       }
-    }).expectedValues("", "Li-ion");
+    }).expectedValues("Li-ion").then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_TECHNOLOGY, ""));
+      }
+    }).expectedValues("Li-ion", "");
   }
 
   @Test public void temperature() {
@@ -414,14 +415,14 @@ public class RxBatteryManagerTest {
     assertThat(RxBatteryManager.temperature(application)).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_TEMPERATURE, 0));
-      }
-    }).expectedValues(0).then(new Action0() {
-      @Override public void call() {
-        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_TEMPERATURE, 1));
       }
-    }).expectedValues(0, 1);
+    }).expectedValues(1).then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_TEMPERATURE, 0));
+      }
+    }).expectedValues(1, 0);
   }
 
   @Test public void voltage() {
@@ -450,13 +451,13 @@ public class RxBatteryManagerTest {
     assertThat(RxBatteryManager.voltage(application)).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
-            .putExtra(BatteryManager.EXTRA_VOLTAGE, 0));
-      }
-    }).expectedValues(0).then(new Action0() {
-      @Override public void call() {
-        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
             .putExtra(BatteryManager.EXTRA_VOLTAGE, 1));
       }
-    }).expectedValues(0, 1);
+    }).expectedValues(1).then(new Action0() {
+      @Override public void call() {
+        application.sendBroadcast(new Intent(Intent.ACTION_BATTERY_CHANGED)
+            .putExtra(BatteryManager.EXTRA_VOLTAGE, 0));
+      }
+    }).expectedValues(1, 0);
   }
 }

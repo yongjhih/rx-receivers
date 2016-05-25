@@ -15,7 +15,7 @@ import rx.functions.Action0;
 
 @RunWith(RobolectricTestRunner.class) //
 public class RxBroadcastReceiverTest {
-  @Test(expected=IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void createWithNullThrows() {
       RxBroadcastReceiver.create(null, (IntentFilter) null);
   }
@@ -52,7 +52,8 @@ public class RxBroadcastReceiverTest {
     final Intent intent2 = new Intent("test_action").putExtra("bar", "baz");
     final Intent intent3 = new Intent("test_action_ignored");
     final Intent intent4 = new Intent("test_action").putExtra("bar", "baz");
-    RxAssertions.assertThat(RxBroadcastReceiver.create(application, new IntentFilter("test_action"))).emitsNothing().then(new Action0() {
+    RxAssertions.assertThat(RxBroadcastReceiver.create(application,
+                new IntentFilter("test_action"))).emitsNothing().then(new Action0() {
       @Override public void call() {
         application.sendBroadcast(intent1);
       }

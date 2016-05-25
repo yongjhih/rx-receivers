@@ -190,10 +190,10 @@ public class RxBatteryManager {
    */
   @CheckResult @NonNull
   public static Observable<Boolean> charging(@NonNull final Context context) {
-    return status(context).exists(new Func1<Integer, Boolean>() {
+    return status(context).map(new Func1<Integer, Boolean>() {
       @Override public Boolean call(@BatteryStatus Integer i) {
-          return BatteryManager.BATTERY_STATUS_CHARGING == i ||
-            BatteryManager.BATTERY_STATUS_FULL == i;
+          return BatteryManager.BATTERY_STATUS_CHARGING == i
+            || BatteryManager.BATTERY_STATUS_FULL == i;
       }
     });
   }
