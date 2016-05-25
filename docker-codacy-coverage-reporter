@@ -1,2 +1,9 @@
 #!/usr/bin/env bash
+# CODACY_PROJECT_TOKEN=ffffffffffffffffffffffffffffffff ./docker-codacy-coverage-reporter
+
+if [ ! "$CODACY_PROJECT_TOKEN" ]; then
+    echo "Usage: CODACY_PROJECT_TOKEN=ffffffffffffffffffffffffffffffff $0"
+    exit 1
+fi
+
 docker run -it -e CODACY_PROJECT_TOKEN=$CODACY_PROJECT_TOKEN -v $(pwd):/src yongjhih/codacy-coverage-reporter codacy-coverage-reporter -l Java -r ./rx-receivers/build/reports/jacoco/jacocoTestDebugUnitTestReport/jacocoTestDebugUnitTestReport.xml
