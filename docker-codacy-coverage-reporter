@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker run -it -e CODACY_PROJECT_TOKEN=$CODACY_PROJECT_TOKEN -v $(pwd):/src yongjhih/codacy-coverage-reporter codacy-coverage-reporter -l Java -r ./rx-receivers/build/reports/jacoco/jacocoTestDebugUnitTestReport/jacocoTestDebugUnitTestReport.xml
